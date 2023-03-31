@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chrome Extension</title>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy" -->
+    <!-- content="default-src 'self'; img-src https://*; child-src 'none';"> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' gap:; script-src 'self' data: https://www.increasingly.co 'unsafe-eval'; object-src *; style-src 'self' data: 'unsafe-inline'; img-src 'self' data:; media-src 'self' data:; font-src 'self' data:; connect-src *"> -->
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://www.increasingly.co/Increasingly_chrome/plugin/materialize.min.css" crossorigin="anonymous">
+    <!-- Skeleton Style-->
+    <link href="https://www.increasingly.co/Increasingly_chrome/assets/css/style.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Library jQuery-->
+    <script src="https://www.increasingly.co/Increasingly_chrome/plugin/jquery.min.js" crossorigin="anonymous"></script>
+
+    <script src="https://www.increasingly.co/Increasingly_chrome/plugin/materialize.js" crossorigin="anonymous"></script>
+    
+</head>
+
+<body>
+
+    <!--Header-->
+    <header id="extension-header" class="header-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col m6 s8">
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo"><img class="" src="assets/images/logo.png"
+                        alt="increasingly" /></a>
+                    </div>
+                </div>
+                <div class="col m6 s4">
+                    <ul class="logout right">
+                        <!-- waves-effect waves-light  -->
+                        <li><button id="logout_btn" class="btn-large  btn-icon btn-outline">Logout</button></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <!--Main-->
+    <main id="extension-main" class="main-wrap">
+        <div class="container">
+            <div class="row">
+
+                <!--Title Main-->
+                <div class="col m12 s12">
+                    <h2 class="title-md">Advance operations</h2>
+                </div>
+
+                <!-- Refresh Panel -->
+                <div class="col m6 s12">
+                    <div class="card-panel hoverable feed-refresh">
+                        <div class="card-panel-inner">
+                            <div class="icon-wrap text-center feed-icon">
+                                <i class="la la-refresh"></i><i class="la la-check hide"></i> <i class="la la-frown-o hide" style="color:red;"></i>
+                            </div>
+                            <div class="content-wrap text-center">
+                                <h2 class="title-md">Feed Refresh</h2>
+                                <p class="refresh_process hide"> Your request is being processed. Please wait ... </p>
+                                <p class="feed_process hide"> Feed update is already in progress ...</p>
+                                <span class="feed_error hide"> Something went wrong. Please try again. </span>
+                                <!-- Modal Trigger -->
+                                <button data-target="modal1"
+                                    class="waves-effect waves-light btn modal-trigger btn-large btn-fill modal-trigger" id="feed_refresh">Refresh</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create Panel -->
+                <div class="col m6 s12 hide">
+                    <div class="card-panel hoverable create-bundle-wrap">
+                        <div class="card-panel-inner">
+                            <div class="icon-wrap text-center"><span class="lnr lnr-sync"></span></div>
+                            <div class="content-wrap text-center browse-panel">
+                                <div class="icon-wrap text-center"><img src="assets/images/bundle.png" alt="" /></div>
+                                <h2 class="title-md">Create Bundle</h2>
+                                <form action="#">
+                                    <div class="file-field input-field">
+                                        <div class="file-path-wrapper">
+                                            <input placeholder="Upload your files here..." class="file-path validate"
+                                                type="text">
+                                        </div>
+                                        <div class="btn btn-large">
+                                            <span class="">Upload</span>
+                                            <input type="file">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Refresh -->
+    <div id="modal1" class="modal status-wrap"> 
+        <div class="modal-wrap">
+            <div class="modal-header">
+                <span style="float:right" class="close_modal">x</span>
+                <div class="icon-wrap text-center"> <i class="la la-check"></i>
+                <h3>Your request is being processed</h3></div>
+            </div>
+            <div class="modal-content">
+                <ul class="collection collection-wrap">
+                    <li class="confirm-msg">You will be notified via email once the feed is refreshed.
+                    </li>
+                    <li class="confirm-msg">It may take 5 mins to 1 hour for this change to take effect on your site.
+                    </li>
+                    <li class="confirm-msg-block">If this change does not take effect, please contact support</a>
+                    </li>
+                </ul>
+                <div class="modal-footer">
+                    <ul class="list-inline addition-links text-center">
+                        <li class="list-inline-item"><a href='mailto:hello@increasingly.com'><i class="la la-envelope-o"></i>Contact support</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts/Styles -->
+    <link href="assets/css/line-awesome.css" rel="stylesheet">
+    <link href="assets/css/line-awesome-font-awesome.css" rel="stylesheet">
+    <link href="https://www.increasingly.co/Increasingly_chrome/plugin/scsss.css" rel="stylesheet">
+
+    <!-- Modal Trigger -->
+    <!-- <script src="./js/jQuery.js"></script> -->
+   <!--   <script>
+        // $(document).ready(function () {
+        //     $('.modal').modal();
+        // });
+    </script> -->
+    <script src="./js/advance_op_dev.js"></script>
+</body>
+
+</html>

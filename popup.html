@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <!-- <meta name="title" content="Increasingly Bundle Enable / Disable"> -->
+      <title>Increasingly Bundle Enable / Disable</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style type="text/css">
+         /* @font-face {
+         font-family: "Montserrat-Regular";
+         src: url('https://www.increasingly.com/montserrat_fonts/Montserrat-Regular.otf');
+         } */
+         a {
+         cursor: pointer;
+         color: #008EB4;
+         }
+         .increasingly-popup {
+         position: fixed;
+         left: 300px;
+         top: 10%;
+         border-radius: 5px;
+         border: solid 1px #fff;
+         box-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
+         text-shadow: 0 1px 1px #fff;
+         font-size: 14px;
+         overflow: hidden;
+         z-index: 15;
+         }
+         .increasingly-popup-inline {
+         box-shadow: none;
+         left: 0;
+         top: 0;
+         position: relative;
+         border: none;
+         border-radius: 0;
+         }
+         .increasingly-popup-inline .increasingly-popup-close {
+         display: none;
+         }
+         .increasingly-popup-inline .increasingly-popup-in {
+         padding: 6px 12px;
+         }
+         .increasingly-popup h2,
+         h1 {
+         font-family: "Montserrat-Regular";
+         color: #48B28D;
+         text-shadow: 0 1px 1px #fff;
+         margin: 5px;
+         padding: 0;
+         width: 100%;
+         font-weight: normal;
+         font-style: normal;
+         font-size: 15px !important;
+         }
+         /*.increasingly-popup-content {
+         padding: 2px 10px 2px 15px;
+         }*/
+         .increasingly-popup-close {
+         z-index: 1;
+         position: relative;
+         width: 18px;
+         height: 18px;
+         border-radius: 7px;
+         background: url(close.png?a) no-repeat 0px -2px;
+         float: right;
+         display: block;
+         cursor: pointer;
+         margin: 6px 11px;
+         }
+         .increasingly-popup-in {
+         padding: 28px 10px 10px;
+         position: relative;
+         }
+         .increasingly-popup-white {
+         position: relative;
+         border-radius: 6px;
+         box-shadow: 0 1px 1px #fff;
+         padding: 2px 10px 2px 15px;
+         }
+         .increasingly-popup-form {
+         /*padding: 2px 0 0px 0;*/
+         }
+         .increasingly-popup-form label {
+         font-size: 15px;
+         font-family: "Montserrat-Regular";
+         font-style: normal;
+         color: #48B28D;
+         }
+         .increasingly-popup-form label b {
+         font-weight: normal;
+         }
+         .control-group {
+         margin-bottom: 10px;
+         }
+         .control {
+         padding: 2px 0 2px;
+         }
+         .increasingly-popup-form input[type=email],
+         .increasingly-popup-form input[type=password] {
+         width: 100%;
+         padding: 8px;
+         margin: 0;
+         font-size: 15px;
+         font-family: "Montserrat-Regular";
+         box-sizing: border-box;
+         background: #fff;
+         border: solid 1px #999;
+         outline: none;
+         transition: 0.2s;
+         -webkit-transition: 0.2s;
+         }
+         /* #increasingly_bundle input[type=button] {
+         color:red;
+         background:url(http://www.increasingly.co/Increasingly_chrome/assets/images/bundle01.png);
+         }*/
+         .increasingly-form-submit {
+         padding: 10px 0 10px 0px;
+         }
+         .btn {
+         font-family: "Montserrat-Regular";
+         cursor: pointer;
+         font-size: 15px;
+         display: inline-block;
+         padding: 2px 20px;
+         background-color: #48B28D;
+         border-bottom: solid 1px #48B28D;
+         border-right: solid 1px #48B28D;
+         color: #fff;
+         text-shadow: 1px 1px 1px #48B28D;
+         box-shadow: 0 1px 1px #fff;
+         user-select: none;
+         border-radius: 0px;
+         -webkit-user-select: none;
+         }
+         .increasingly-popup-overlay {
+         position: fixed;
+         width: 100%;
+         height: 100%;
+         background: rgba(0, 0, 0, 0.4);
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         z-index: 10;
+         background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+         background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(0, 0, 0, 0.8)));
+         background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+         background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+         background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+         background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.8) 100%);
+         }
+         .increasingly-popup-overlay-inline {
+         display: none;
+         width: 0;
+         height: 0;
+         overflow: hidden;
+         opacity: 0;
+         }
+         .hide {
+         display: none;
+         }
+         .switch {
+         position: relative;
+         display: inline-block;
+         width: 100%;
+         height: 26px;
+         margin-left: 15px;
+         margin-top: -1px;
+         }
+         .switch input {
+         opacity: 0;
+         width: 0;
+         height: 0;
+         }
+         .slider {
+         position: absolute;
+         cursor: pointer;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background-color: #ccc;
+         -webkit-transition: .4s;
+         transition: .4s;
+         }
+         .slider:before {
+         position: absolute;
+         content: "";
+         height: 26px;
+         width: 26px;
+         left: 4px;
+         bottom: 4px;
+         background-color: white;
+         -webkit-transition: .4s;
+         transition: .4s;
+         }
+         input:checked+.slider {
+         background-color: #2196F3;
+         }
+         .remove_input {
+         background-color: #ccc !important;
+         }
+         .remove_input_button:before {
+         transform: translateX(0px) !important;
+         }
+         .add_input {
+         background-color: #2196F3;
+         }
+         .add_input_button:before {
+         transform: translateX(26px);
+         }
+         input:focus+.slider {
+         box-shadow: 0 0 1px #2196F3;
+         }
+         input:checked+.slider:before {
+         -webkit-transform: translateX(26px);
+         -ms-transform: translateX(26px);
+         transform: translateX(26px);
+         }
+         .slider:before {
+         position: absolute;
+         content: "";
+         height: 18px;
+         width: 18px;
+         left: 10px;
+         bottom: 4px;
+         background-color: white;
+         -webkit-transition: .4s;
+         transition: .4s;
+         }
+         .slider.round {
+         border-radius: 34px;
+         }
+         .slider.round:before {
+         border-radius: 50%;
+         }
+         .bundle {
+         padding: 10px;
+         }
+         .container {
+         display: flex;
+         margin-top: -15px;
+         }
+         h1,
+         h2 {
+         width: 65%;
+         }
+         .tcenter {
+         text-align: center;
+         }
+         .padding5>img {
+         padding-right: 8px;
+         width: auto;
+         height: 22px;
+         }
+         .padding5 {
+         padding: 5px;
+         }
+         .padding10 {
+         padding: 10px;
+         }
+         .margin5 {
+         margin: 5px;
+         }
+         .btn:hover {
+         border: 1px solid #01ae81 !important;
+         text-shadow: none !important;
+         color: #FFF !important;
+         background-color: #01ae81 !important;
+         }
+         .close {
+         font-size: 25px;
+         padding: 8px !important;
+         margin-top: -10px;
+         }
+         .login_style {
+         display: inline;
+         font-weight: 500;
+         font-family: "Montserrat-Regular";
+         font-size: 16px;
+         color: #000;
+         padding-bottom: 10px;
+         margin: 0px auto 5px 0;
+         }
+         .contact_style {
+         font-family: "Montserrat-Regular";
+         font-size: 14px;
+         padding-top: 5px;
+         margin-top: 15px;
+         color: #000;
+         text-align: center;
+         font-weight: 500;
+         width: 100%;
+         }
+         .contact_style a,
+         .contact_style a:hover {
+         color: #000;
+         text-decoration: none;
+         }
+         .txt_wrng {
+         color: #48B28D;
+         text-shadow: 0 1px 1px #fff;
+         font-family: "Montserrat-Regular";
+         margin: 5px 0 12px 0;
+         font-size: 14px;
+         font-style: normal;
+         }
+         .notification {
+         font-family: "Montserrat-Regular";
+         margin: 5px 0 12px 0;
+         padding: 5px;
+         font-size: 12px;
+         font-weight: 100;
+         color: #3a3838;
+         }
+         .tmargin15 {
+         margin-top: 15px;
+         }
+         .error_check,
+         .error_stat,
+         .error_check_bundle,
+         .error_email {
+         color: #e84949;
+         }
+         .error_check_bundle {
+         margin-bottom: 5px;
+         }
+         .glyphicon {
+         top: 10px;
+         }
+         .btncenter {
+         margin-left: 24%;
+         }
+         .btn-disable {
+         padding: 10px;
+         background: #48B28D;
+         color: #fff;
+         font-size: 16px;
+         }
+         .btn-confirm {
+         padding: 5px 65px;
+         }
+         .btn-signout {
+         background: #fff;
+         width: 100%;
+         text-shadow: none;
+         color: #000;
+         cursor: pointer;
+         font-size: 13px;
+         padding: 10px;
+         border: 1px solid #000;
+         position: relative;
+         }
+         #bundle_check {
+         font-family: "Montserrat-Regular";
+         font-size: 18px;
+         }
+         .forgot_pswd {
+         font-family: "Montserrat-Regular";
+         font-size: 16px;
+         padding-top: 5px;
+         margin-top: 15px;
+         color: #48B28D;
+         border-top: 1px solid #48B28D;
+         padding-bottom: 0;
+         margin-left: 0;
+         font-weight: bold;
+         width: 100%;
+         text-decoration: underline;
+         }
+         .forgot_pswd a {
+         color: #e84949;
+         }
+         .bundle_design {
+         margin-top: 10px;
+         margin-bottom: 10px;
+         }
+         .bundle_disable {
+         padding: 10px;
+         width: 100%;
+         margin-bottom: 5px;
+         }
+         .cntrl_pnl {
+         font-size: 7px;
+         margin-left: -5%;
+         margin-top: 8px;
+         }
+         .enable,
+         .disable {
+         margin-top: 15px;
+         margin-left: 30px;
+         }
+         .inc_more {
+         cursor: pointer;
+         display: inline-block;
+         }
+         .btn-signin {
+         padding: 10px;
+         position: relative;
+         }
+         .fa-sign-in,
+         .fa-sign-out,
+         .fa-dropbox {
+         font-size: 18px;
+         margin-left: 5px;
+         }
+         .fa-envelope-o,
+         .fa-cogs {
+         margin-right: 5px;
+         color: #48B28D;
+         }
+         #inc_more,
+         #inc_more1,
+         #inc_more2,
+         #inc_more3,
+         #inc_more4 {
+         border-right: 1px solid #ccc;
+         margin-right: 10px;
+         font-size: 12px !important;
+         font-family: sans-serif;
+         }
+         .btn-signout:hover {
+         background: #48B28D !important;
+         color: #fff !important;
+         }
+         .contact_support {
+         margin-left: 15px;
+         font-size: 12px !important;
+         font-family: sans-serif;
+         }
+         .bundle_disable {
+         margin-right: 5px;
+         }
+         .confirmation_msg,
+         .non_confirmation_msg {
+         margin-left: 30px;
+         }
+         .settings {
+         margin-right: 5px;
+         width: 12px;
+         }
+         .butn-no {
+         border: 1px solid #000;
+         color: #000;
+         padding-bottom: 7px;
+         padding-top: 7px;
+         }
+         .butn-no:hover {
+         background: #48B28D !important;
+         color: #fff !important;
+         border: 1px solid #48B28D;
+         text-shadow: none;
+         text-decoration: none;
+         }
+         .btn-goback {
+         border: 1px solid #000 !important;
+         color: #000 !important;
+         background: #fff !important;
+         text-shadow: none;
+         }
+         .btn-goback:hover {
+         background: #48B28D !important;
+         color: #fff !important;
+         border: 1px solid #48B28D !important;
+         }
+         button#sign_out_button:after {
+         content: '';
+         background-image: url(logout.png);
+         width: 32px;
+         height: 32px;
+         display: block;
+         position: absolute;
+         top: 10px;
+         background-repeat: no-repeat;
+         left: 214px;
+         background-size: 52%;
+         }
+         button#sign_out_button:hover:after {
+         content: '';
+         background-image: url(logout-light.png);
+         }
+         a#sign_in_button:after {
+         content: '';
+         background-image: url(logout-light.png);
+         width: 32px;
+         height: 32px;
+         display: block;
+         position: absolute;
+         top: 11px;
+         background-repeat: no-repeat;
+         left: 205px;
+         background-size: 52%;
+         }
+         .btn-success:active {
+         background-color: #48B28D;
+         border-bottom: solid 1px #48B28D;
+         border-right: solid 1px #48B28D;
+         color: #fff;
+         text-shadow: 1px 1px 1px #48B28D;
+         }
+         .btn-success:focus {
+         background-color: #48B28D;
+         border-bottom: solid 1px #48B28D;
+         border-right: solid 1px #48B28D;
+         color: #fff;
+         text-shadow: 1px 1px 1px #48B28D;
+         }
+         .btn-success:visited {
+         background-color: #48B28D;
+         border-bottom: solid 1px #48B28D;
+         border-right: solid 1px #48B28D;
+         color: #fff;
+         text-shadow: 1px 1px 1px #48B28D;
+         }
+         .btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover, .open>.dropdown-toggle.btn-success.focus, .open>.dropdown-toggle.btn-success:focus, .open>.dropdown-toggle.btn-success:hover{
+         background-color: #48B28D !important;
+         border-bottom: solid 1px #48B28D !important;
+         border-right: solid 1px #48B28D !important;
+         color: #fff;
+         text-shadow: 1px 1px 1px #48B28D !important;
+         }
+      </style>
+   </head>
+   <body>
+      <div>
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <div id="wrap">
+         <div class="increasingly-popup increasingly-popup-inline popup-sign" style="width: 400px;">
+            <div class="increasingly-popup-in">
+               <form class="increasingly-form-signin ">
+                  <div class="increasingly-popup-white">
+                     <div class="increasingly-popup-content increasingly-popup-content-sign">
+                        <h4 class="login_style">
+                           Log into your account
+                        </h4>
+                        <div class="tcenter padding5 margin5" style="display:inline-block;">
+                           <img src="logo.png" class="tcenter"/>
+                        </div>
+                        <div class="increasingly-popup-form">
+                           <div class="control-group control-email">
+                              <div class="control tmargin15">
+                                 <input tabindex="1" type="email" placeholder="Enter Email Address" name="email" id="email_input">
+                              </div>
+                           </div>
+                           <div class="control-group control-password" style="" placeholder="Password">
+                              <div class="control">
+                                 <input tabindex="2" type="password" minlength="8" maxlength="30" placeholder="Enter Password" name="password" id="password_input">
+                              </div>
+                           </div>
+                           <span class="hide error_email">Email Id or password is not correct. Please try again.</span>
+                           <span class="hide error_stat">Email Id or password is not matching with client.</span>
+                           <span class="hide error_check">Sorry, could not process your request. Please contact Increasingly support.</span>
+                        </div>
+                        <div class="increasingly-form-submit">
+                           <a tabindex="3" id="sign_in_button" class="btn btn-default btn-success btn-block btn-submit btn-signin">
+                           Login</i>
+                           </a>
+                        </div>
+                        <div class="contact_style">
+                           <a href='mailto:hello@increasingly.com' class="contact_support"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact Support</a>
+                        </div>
+                     </div>
+                     <!-- <div class="forgot_pswd">
+                        <a href="">Forgotten your password?</a>
+                        </div> -->
+                  </div>
+               </form>
+               <div class="container hide">
+                  <div class="cntrl_pnl">
+                     <h2 style="color:#000;margin-right:95px;margin-left:17px;">Control panel </h2>
+                  </div>
+                  <div class="tcenter padding5 margin5" style="display:inline-block;">
+                     <img src="logo.png" class="tcenter"/>
+                  </div>
+               </div>
+               <div class="increasingly-form-signout padding5 hide">
+                  <div class="">
+                     <div id="bundle_check" class="bundle_design" id="bundle_api_status">
+                     </div>
+                     <button class="btn btn-submit bundle_disable" id="increasingly_bundle">Disable bundles<i class="fa fa-dropbox" aria-hidden="true"></i></button>
+                     <button class="btn btn-submit btn-signout" style="" id="sign_out_button" tabindex="4">Logout</button>
+                     <!-- <span class=" slider round"></span> -->
+                     <div class='hide'>
+                        <h2>Bundle Id</h2>
+                        <div class="form-group">
+                           <input type="text" class="form-control bundle" id="bundle_val" placeholder="Enter bundle Id" name="bundle_val">
+                        </div>
+                        <a class="btn btn-submit btn-signout" style="" id="bundle_submit" tabindex="5">Submit</a>
+                     </div>
+                     <!-- <div class="">
+                        <h2>Feed Refresh</h2>
+                        <input type="button" value="Feed Refresh" class="btn btn-submit bundle_disable" id="feed_refresh">
+                        </div>
+                        <div class="create_bundle">
+                        <h2>Create Bundle</h2>
+                        <div style="display:inline-flex;">
+                            <input type="file" id="create-bundle">
+                            <input type="button" id="submit_bundle" value="Submit">
+                        </div>
+                        </div> -->
+                     <!-- <br> -->
+                  </div>
+                  <!-- <br> -->
+                  <!--  <div class="container">
+                     <h2>Feed Update</h2>
+                     <label class="switch">
+                         <input type="checkbox" value="On" id="feed_update"">
+                         <span class=" slider round"></span>
+                     </label>
+                     </div>
+                     <br> -->
+                  <!-- <a id="sign_out_button" class="btn btn-default btn-success btn-block btn-submit "> -->
+                  <!-- <span class="glyphicon glyphicon-off btn-signout" id="sign_out_button"></span> -->
+                  <!-- </a> -->
+                  <!-- <a class="btn btn-submit btn-signout" style="" id="sign_out_button">Log Out</a> -->
+                  <div class="contact_style">
+                     <div class="inc_more">
+                        <h2 id="inc_more" style="color:#000;"><img src="settings.png" class="settings"/>Advanced Operations</h2>
+                     </div>
+                     <a href='mailto:hello@increasingly.com' class="contact_support"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact Support</a>
+                  </div>
+               </div>
+               <div class="enable hide">
+                  <span class="txt_wrng"><span style="color:#000">Are you sure you want to <span style="color:#e84949;">enable</span> the bundles?</span></span>
+                  <label class="tmargin15">
+                  <a class="btn btn-submit btn-confirm" style="" id="submit_enable_yes" tabindex="10">YES</a>
+                  <a class="btn-submit btn-confirm butn-no" style="" id="submit_enable_no" tabindex="11">NO</a>
+                  <span class="error_check_bundle hide">Sorry, could not process your request please contact Increasingly support.</span>
+                  </label>
+                  <div class="contact_style">
+                     <div class="inc_more">
+                        <h2 id="inc_more1" style="color:#000;"><img src="settings.png" class="settings"/>Advanced Operation</h2>
+                     </div>
+                     <a href='mailto:hello@increasingly.com' class="contact_support"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact Support</a>
+                  </div>
+               </div>
+               <div class="disable hide">
+                  <span class="txt_wrng"><span style="color:#000">Are you sure you want to <span style="color:#e84949;">disable</span> the bundles?</span></span>
+                  <label class="tmargin15">
+                  <a class="btn btn-submit btn-confirm" style="" id="submit_disable_yes" tabindex="12">YES</a>
+                  <a class="btn-submit btn-confirm butn-no" style="" id="submit_disable_no" tabindex="13">NO</a>
+                  <span class="error_check_bundle hide">Sorry, could not process your request please contact Increasingly support.</span>
+                  </label>
+                  <div class="contact_style">
+                     <div class="inc_more">
+                        <h2 id="inc_more2" style="color:#000;"><img src="settings.png" class="settings"/>Advanced Operation</h2>
+                     </div>
+                     <a href='mailto:hello@increasingly.com' class="contact_support"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact Support</a>
+                  </div>
+               </div>
+               <div class="confirmation_msg hide">
+                  <div class="txt_wrng"><span style="color:#000">Bundles have been <span style="color:#e84949;">enabled</span> on your website.</span></div>
+                  <div class="notification">
+                     We have sent an email confirmation to the email registered with this account.<br>
+                     <div style="padding-top:10px;">It may take up to 15 minutes for this change to take affect on your site.</div>
+                     <div style="padding-top:10px;">If this change does not take effect, please contact support.</div>
+                  </div>
+                  <label class="btncenter">
+                  <a class="btn btn-submit btn-goback" style="width:175px;padding:5px;" id="confirmed" tabindex="6">Go Back</a>
+                  </label>
+                  <div class="contact_style">
+                     <div class="inc_more">
+                        <h2 id="inc_more3" style="color:#000;"><img src="settings.png" class="settings"/>Advanced Operation</h2>
+                     </div>
+                     <a href='mailto:hello@increasingly.com' class="contact_support"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact Support</a>
+                  </div>
+               </div>
+               <div class="non_confirmation_msg hide">
+                  <div class="txt_wrng"><span style="color:#000">Bundles have been <span style="color:#e84949;">disabled</span> on your website.</span></div>
+                  <div class="notification">
+                     We have sent an email confirmation to the email registered with this account.<br>
+                     <div style="padding-top:10px;">It may take up to 15 minutes for this change to take affect on your site.</div>
+                     <div style="padding-top:10px;">If this change does not take effect, please contact support.</div>
+                  </div>
+                  <label class="btncenter">
+                  <a class="btn btn-submit btn-goback" style="width:175px;padding:5px;" id="not_confirmed" tabindex="8">Go Back</a>
+                  </label>
+                  <div class="contact_style">
+                     <div class="inc_more">
+                        <h2 id="inc_more4" style="color:#000;"><img src="settings.png" class="settings"/>Advanced Operation</h2>
+                     </div>
+                     <a href='mailto:hello@increasingly.com' class="contact_support"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact Support</a>
+                  </div>
+               </div>
+            </div>
+            <script src="jQuery.js"></script>
+            <script src="popup.js"></script>
+         </div>
+      </div>
+   </body>
+</html>
